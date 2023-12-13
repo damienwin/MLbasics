@@ -12,24 +12,30 @@
     >
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Linear and Logistic Regression</a>
+            <a class="navbar-brand text-white" href="#">Linear and Logistic Regression</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link" id="home" href="/">Home</a>
-                    <a class="nav-item nav-link" id="about" href="/about">About</a>
-                    <a class="nav-item nav-link" id="repo" href="/repo">Github Repository</a>
+                    <a class="nav-item nav-link text-white" id="home" href="/">Home</a>
+                    <a class="nav-item nav-link text-white" id="about" href="/about">About</a>
+                    <a class="nav-item nav-link text-white" id="repo" href="/repo">Github Repository</a>
                 </div>
             </div>
         </div>
     </nav>
     {% block content %}
-    <h1>Learn how to plot linear and logistic regression models with realtime animations</h1>
-    <body>What are linear functions? What are they used for?</body>
+    <a href="https://intellisys.haow.ca/">
+      <img src="{{ url_for('static', filename='isl-logo-dark.gif') }}" class="rounded mx-auto d-block mb-0" height="150px">
+    </a>
+    <div class="w-100">
+      <div class="text-center">
+        <h1 class="display-4"><strong>What is Linear Regression?</strong></h1>
+      </div>
+    </div>
     <a href="/introduction/page1">Introduction</a>
     <button>Linear Function</button>
     <button>Cost</button>
