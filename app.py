@@ -1,30 +1,37 @@
 from flask import Flask, request, send_from_directory, render_template
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+import plotly.express as px
 import numpy as np
-import mpld3
+
+
 
 app = Flask(__name__)
 
 sections = {
-    'introduction': ['page1', 'page2', 'page3']
+    'linear_regression': ['page1', 'page2', 'page3']
 }
 
 def get_result():
-    fig, ax = plt.subplots()  # Create a figure and axes
-    ax.set_title('Blank Graph')  # Set a title for the graph
-    ax.set_xlabel('x-axis')
-    ax.set_ylabel('y-axis')
-    ax.grid()
-
-    # Customize the graph as needed (e.g., labels, limits, styles)
-    ax.set(xlim=(0, 8), xticks=np.arange(0, 9), 
-           ylim=(0, 8), yticks=np.arange(0, 9))
+    # make data
+    x = np.linspace(0, 10, 100)
     
-    # Convert the Matplotlib figure to HTML
-    blankgraph = mpld3.fig_to_html(fig)
-    return blankgraph
+    # graph lines and points on figure
+    fig = px.line(x=x, y=(0.5 * x + 2), labels={'x': 'x-axis', 'y': 'y-axis'})
+    fig.update_traces(showlegend=True, name ='w*x + b')
+    fig.add_scatter(x=[0], y=[2], mode='markers', marker=dict(color='red', size=10), name='y-intercept (b)')
+
+    
+
+    # update layout
+    fig.update_layout(
+        title="Basic Linear Function",
+        template='simple_white',
+        xaxis=dict(range=[0,10], dtick=1, showgrid=True),
+        yaxis=dict(range=[0,8], dtick=1, showgrid=True),
+        width=600, height=400
+    )
+
+    graph = fig.to_html(full_html=False)
+    return graph
 
 @app.route('/')
 def home():
@@ -49,16 +56,16 @@ def show_page(category, page):
             return render_template(f'{category}/{page}.html', category=category, page=page, prev_page=prev_page, next_page=next_page)
     return "Page not found", 404
 
-@app.route('/introduction/page2')
-def intropage2():
+@app.route('/linear_regression/page1')
+def linearpage():
     python_result = get_result()
     
-    category = 'introduction'
-    page = 'page2'
+    category = 'linear_regression'
+    page = 'page1'
     prev_page = sections[category][sections[category].index(page) - 1] if page in sections[category] and sections[category].index(page) > 0 else None
     next_page = sections[category][sections[category].index(page) + 1] if page in sections[category] and sections[category].index(page) < len(sections[category]) - 1 else None
 
-    return render_template('introduction/page2.html', html_result=python_result, prev_page=prev_page, next_page=next_page)
+    return render_template('linear_regression/page1.html', html_result=python_result, prev_page=prev_page, next_page=next_page)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

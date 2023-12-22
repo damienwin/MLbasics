@@ -1,0 +1,51 @@
+{% extends "slideindex.html" %}
+{% block title %}Linear Regression Page 1{% endblock %}
+{% block navtitle %}Linear Regression{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 mt-5">
+        <!-- Left side with text -->    
+        <h1 class="display-4"><strong>Linear Regression Basics</strong></h1>
+        <div class="row">
+            <dt class="mt-4 col-sm-3 mb-4">Linear Function</dt>
+            <dd class="mt-4 col-sm-9 mb-4">A linear function consists of a y-intercept (b) and weight multiplied to x.</dd>
+
+            <dt class="col-sm-3 mb-4">Features</dt>
+            <dd class="col-sm-9 mb-4">A function can have multiple features, or different independent variables, that affect the outcome y. For example, a housing linear function that determines price may have: 
+                <br>&nbsp;&nbsp;&nbsp;x<sub>1</sub> as the square feet
+                <br>&nbsp;&nbsp;&nbsp;x<sub>2</sub> as the number of floors
+                <br>&nbsp;&nbsp;&nbsp;x<sub>3</sub> as the nubmer of rooms.
+            </dd>
+
+            <dt class="col-sm-3 mb-4">Weight</dt>
+            <dd class="col-sm-9 mb-4">Each feature (x<sub>i</sub>) has a different weight (w<sub>i</sub>), which is a value that determines the significance of each feature. The example function above can be represented with: 
+            <br>Price = w<sub>1</sub>x<sub>1</sub> + w<sub>2</sub>x<sub>2</sub> + w<sub>3</sub>x<sub>3</sub> + b
+            </dd>
+
+            <dt class="col-sm-3 mb-4">Cost</dt>
+            <dd class="col-sm-9 mb-4">Finally, each function has a cost, or the total sum of the distance from each data point to the line. More of that later on.</dd>
+        </div>
+      </div>
+      <div class="col-md-6 mt-5">
+        <!-- Right side with the graph -->
+        <div class="d-flex justify-content-center mt-5">
+          {{ html_result | safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block slider %}
+    {% if prev_page %}
+    <a href="/linear_regression/{{ prev_page }}">Previous</a>
+    {% endif %}
+
+    {% if next_page %}
+    <a href="/linear_regression/{{ next_page }}">Next</a>
+    {% endif %}
+{% endblock %}
+

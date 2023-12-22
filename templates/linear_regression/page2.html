@@ -1,0 +1,18 @@
+{% extends "slideindex.html" %}
+{% block title %}Linear Regression Page 2{% endblock %}
+{% block navtitle %}Linear Regression{% endblock %}
+
+
+{% block content %}
+<h1>Linear Regression Page 2</h1>
+{% endblock %}
+
+{% block slider %}
+    {% if prev_page %}
+    <a href="/linear_regression/{{ prev_page }}">Previous</a>
+    {% endif %}
+
+    {% if next_page %}
+    <a href="/linear_regression/{{ next_page }}">Next</a>
+    {% endif %}
+{% endblock %}
