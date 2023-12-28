@@ -2,17 +2,51 @@
 {% block title %}Linear Regression Page 2{% endblock %}
 {% block navtitle %}Linear Regression{% endblock %}
 
-
 {% block content %}
-<h1>Linear Regression Page 2</h1>
+<div class="container mt-5">
+    <h1 class="display-4"><strong>What is Linear Regression?</strong></h1>
+    <div class="mt-4 mb-4">
+        Regression analysis is a method used to model the relationship between variables in a dataset. 
+        Its objective is to find the best fit line or function to represent the trend in data points. 
+        This line can then predict future outcomes based on given feature values.
+
+        Let's continue with our house example:
+        We plot data for pricing of houses, where the x value is square footage of the house, and the y value is price. 
+        <div id="plot">
+            {{ initial_graph | safe }}
+        </div>
+
+        A line is created using linear regression.
+
+        We then use that line to predict pricing given square footage.
+        <button onclick="window.location.href='/update-plot'">Generate Updated Plot</button>
+    </div>
+</div>
 {% endblock %}
 
 {% block slider %}
-    {% if prev_page %}
-    <a href="/linear_regression/{{ prev_page }}">Previous</a>
-    {% endif %}
-
-    {% if next_page %}
-    <a href="/linear_regression/{{ next_page }}">Next</a>
-    {% endif %}
+<div class="row">
+    <div class="col-md-6 text-start">
+        {% if prev_page %}
+        <a href="/linear_regression/{{ prev_page }}" class="btn btn-outline-info ms-2">
+            <strong>
+                <h4 class="mt-1">
+                    <i class="bi bi-caret-left"></i> Prev
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+    <div class="col-md-6 text-end">
+        {% if next_page %}
+        <a href="/linear_regression/{{ next_page }}" class="btn btn-outline-info me-2">
+            <strong>
+                <h4 class="mt-1">
+                    Next <i class="bi bi-caret-right"></i>
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

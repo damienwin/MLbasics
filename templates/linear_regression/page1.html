@@ -40,12 +40,29 @@
 {% endblock %}
 
 {% block slider %}
-    {% if prev_page %}
-    <a href="/linear_regression/{{ prev_page }}">Previous</a>
-    {% endif %}
-
-    {% if next_page %}
-    <a href="/linear_regression/{{ next_page }}">Next</a>
-    {% endif %}
+<div class="row">
+    <div class="col-md-6 text-start">
+        {% if prev_page %}
+        <a href="/linear_regression/{{ prev_page }}" class="btn btn-outline-info ms-2">
+            <strong>
+                <h4 class="mt-1">
+                    <i class="bi bi-caret-left"></i> Prev
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+    <div class="col-md-6 text-end">
+        {% if next_page %}
+        <a href="/linear_regression/{{ next_page }}" class="btn btn-outline-info me-2">
+            <strong>
+                <h4 class="mt-1">
+                    Next <i class="bi bi-caret-right"></i>
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
 
