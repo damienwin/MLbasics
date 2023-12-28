@@ -12,14 +12,20 @@
 
         Let's continue with our house example:
         We plot data for pricing of houses, where the x value is square footage of the house, and the y value is price. 
-        <div id="plot">
+        <div class="d-flex justify-content-center" style="margin-left: 125px;" plot">
             {{ initial_graph | safe }}
         </div>
 
-        A line is created using linear regression.
+        A line will be created using linear regression.
+        <button onclick="window.location.href='/linear_regression/page2/line'">
+            Plot Regression Line
+        </button>
 
-        We then use that line to predict pricing given square footage.
-        <button onclick="window.location.href='/update-plot'">Generate Updated Plot</button>
+
+        We can then use that line to predict price given square footage.
+        <button onclick="window.location.href='/linear_regression/page2/line/rand-point'">Plot Random Point</button>
+
+        <!-- Scripts -->
     </div>
 </div>
 {% endblock %}
