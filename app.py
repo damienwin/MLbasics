@@ -1,12 +1,14 @@
 from flask import Flask, request, send_from_directory, render_template, jsonify, render_template_string
 import plotly.express as px
 import numpy as np
+from cost_app import cost_bp
 
 app = Flask(__name__)
+app.register_blueprint(cost_bp)
 
-sections = {
-    'linear_regression': ['page1', 'page2', 'page3']
-}
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 def get_result():
     # make data
@@ -30,39 +32,10 @@ def get_result():
     graph = fig.to_html(full_html=False)
     return graph
 
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/repo')
-def repo():
-    return render_template('repo.html')
-
-@app.route('/<category>/<page>')
-def show_page(category, page):
-    if category in sections:
-        current_section = sections[category]
-        if page in current_section:
-            current_index = current_section.index(page)
-            prev_page = current_section[current_index - 1] if current_index > 0 else None
-            next_page = current_section[current_index + 1] if current_index < len(current_section) - 1 else None
-            return render_template(f'{category}/{page}.html', category=category, page=page, prev_page=prev_page, next_page=next_page)
-    return "Page not found", 404
-
 @app.route('/linear_regression/page1')
 def linearpage():
     python_result = get_result()
-    
-    category = 'linear_regression'
-    page = 'page1'
-    prev_page = sections[category][sections[category].index(page) - 1] if page in sections[category] and sections[category].index(page) > 0 else None
-    next_page = sections[category][sections[category].index(page) + 1] if page in sections[category] and sections[category].index(page) < len(sections[category]) - 1 else None
-
-    return render_template('linear_regression/page1.html', html_result=python_result, prev_page=prev_page, next_page=next_page)
+    return render_template('linear_regression/page1.html', html_result=python_result, next_page='page2')
 
 initial_x = np.linspace(1, 8, 16)
 initial_y = 25 * initial_x + np.random.randn(16) * 16 + 100
@@ -84,8 +57,7 @@ def initial_graph():
 @app.route('/linear_regression/page2')
 def linearpage2():
     res = initial_graph().to_html(full_html=False)
-
-    return render_template('linear_regression/page2.html', initial_graph=res)
+    return render_template('linear_regression/page2.html', initial_graph=res, prev_page='page1')
 
 def add_line_func():
     fig = initial_graph()
@@ -96,7 +68,7 @@ def add_line_func():
 def addline():
     fig = add_line_func()
     line_plot = fig.to_html(full_html=False)
-    return render_template('linear_regression/page2.html', initial_graph=line_plot)
+    return render_template('linear_regression/page2.html', initial_graph=line_plot, prev_page='page1')
 
 
 @app.route('/linear_regression/page2/line/rand-point', methods=['GET'])
@@ -117,6 +89,11 @@ def update_plot():
     # Convert the updated Plotly figure to HTML and return it to the HTML page
     plot_html = fig.to_html(full_html=False)
     return render_template('linear_regression/page2.html', initial_graph=plot_html, prev_page='page1', next_page='page3')
+
+@app.route('/linear_regression/page3')
+def linearpage3():
+    return render_template('linear_regression/page3.html', prev_page='page2', next_page='page1')
+
 
 
 if __name__ == '__main__':

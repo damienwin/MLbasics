@@ -1,0 +1,34 @@
+{% extends "slideindex.html" %}
+{% block title %}Cost Page 3{% endblock %}
+{% block navtitle %}Cost{% endblock %}
+
+{% block content %}
+Cost 3
+{% endblock %}
+
+{% block slider %}
+<div class="row">
+    <div class="col-md-6 text-start">
+        {% if prev_page %}
+        <a href="/cost/{{ prev_page }}" class="btn btn-outline-info ms-2">
+            <strong>
+                <h4 class="mt-1">
+                    <i class="bi bi-caret-left"></i> Prev
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+    <div class="col-md-6 text-end">
+        {% if next_page %}
+        <a href="/cost/{{ next_page }}" class="btn btn-outline-info me-2">
+            <strong>
+                <h4 class="mt-1">
+                    Cost <i class="bi bi-caret-right"></i>
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

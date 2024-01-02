@@ -2,6 +2,34 @@
 {% block title %}Linear Regression Page 3{% endblock %}
 {% block navtitle %}Linear Regression{% endblock %}
 
+{% block content %}
+<div class="container mt-5">
+    <h1 class="display-4"><strong>Where is Regression Used?</strong></h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-3">
+            <h1>Linear Regression</h1>
+            <div>
+                Predicting Housing Prices 
+                <br>Predicting Stock Prices 
+                <br>Analyzing Relationships between age and other factors and health 
+                <br>Forecasting Sales by Analyzing Customer Behavior
+            </div>
+        </div>
+        <div class="col-md-6 mt-3">
+            <h1>Logisitic Regression</h1>
+            <div>
+                Medical Diagnosis i.e. Predicting if a tumor is malignant
+                <br>Email Spam Detection
+                <br>Image Recognition
+                <br>Rain Likelihood Percentage
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
 {% block slider %}
 <div class="row">
@@ -18,10 +46,10 @@
     </div>
     <div class="col-md-6 text-end">
         {% if next_page %}
-        <a href="/linear_regression/{{ next_page }}" class="btn btn-outline-info me-2">
+        <a href="/cost/{{ next_page }}" class="btn btn-outline-info me-2">
             <strong>
                 <h4 class="mt-1">
-                    Next <i class="bi bi-caret-right"></i>
+                    Cost <i class="bi bi-caret-right"></i>
                 </h4>
             </strong>
         </a>
