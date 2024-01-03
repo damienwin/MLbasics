@@ -15,40 +15,66 @@ def costpage1():
         fig.add_trace(
             go.Scatter(
                 visible=False,
-                line=dict(color="#00CED1", width=6),
-                name="w = " + str(weight),
+                line=dict(color="#00CED1", width=2),
                 x=np.arange(0, 10, 0.01),
-                y=weight * np.arange(0, 10, 0.01)
+                y=weight * np.arange(0, 10, 0.01) 
             )
         )
 
-    # Make 10th trace visible
+    # Make 1st trace visible
     fig.data[10].visible = True
 
     # Create and add slider
-    steps = []
-    for i in range(len(fig.data)):
-        wval = i/4 - 5
+    weight_steps = []
+    for i, wval in enumerate(np.arange(-5, 5, 0.25)):
         step = dict(
             method="update",
-            args=[{"visible": [False] * len(fig.data)},
-                  {"title": f"Weight of Function: {wval}"},  # Title
-                  ]
+            args=[{"visible": [i == j for j in range(len(fig.data))]}],
+            label=f"{wval}"
         )
         step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
-        steps.append(step)
+        weight_steps.append(step)
 
-    sliders = [dict(
-        active=10,
-        currentvalue={"prefix": "Weight: "},
+    weight_slider = dict(
+        active=30,
+        currentvalue={"prefix": "Slope(w): "},
         pad={"t": 50},
-        steps=steps,
-    )]
+        steps=weight_steps,
+        tickwidth=.5,
+        len=.5,
+        x=.5
+    )
 
-    fig.update_layout(sliders=sliders, 
-                      xaxis = dict(range=[0, 10]), 
-                      yaxis = dict(range=[0, 8])
-                      )
+    yint_steps = []
+    for i, bval in enumerate(np.arange(0, 8, .25)):
+        y_values = [weight * np.arange(0, 10, 0.01) + bval for weight in np.arange(-5, 5, 0.25)]
+        step = dict(
+            method="restyle",  # Use "restyle" method to update traces
+            args=["y", y_values],  # Update y-values based on the selected y-intercept
+            label=f"{bval}",
+        )
+        yint_steps.append(step)
+
+    yint_slider = dict(
+        active=5,
+        currentvalue={"prefix": "Y-Intercept(b): "},
+        pad={"t": 50},
+        steps=yint_steps,
+        tickwidth=.5,
+        len=.5,
+        x=0
+    )
+    
+    sliders = [weight_slider, yint_slider]
+    
+    fig.update_layout(
+        title="Updatable Linear Function",
+        template='simple_white',
+        sliders=sliders,
+        xaxis=dict(range=[0,10], dtick=1, showgrid=True),
+        yaxis=dict(range=[0,8], dtick=1, showgrid=True),
+        width=900, height=600
+    )
     
     graph = fig.to_html()
     return render_template('cost/page1.html', prev_page='page3', next_page='page2', graph=graph)
