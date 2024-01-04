@@ -10,6 +10,16 @@ def costpage1():
     # Create figure
     fig = go.Figure()
 
+    fig.add_trace(
+        go.Scatter(
+            visible=True,  # Set to visible initially
+            line=dict(color="#00CED1", width=2),  # Adjust line properties as needed
+            x=np.arange(0, 10, 0.01),
+            y=np.arange(0, 10, 0.01),
+            showlegend=False
+        )
+    )
+
     # Add traces, one for each slider step
     for weight in np.arange(-5, 5, 0.25):
         fig.add_trace(
@@ -20,9 +30,6 @@ def costpage1():
                 y=weight * np.arange(0, 10, 0.01) 
             )
         )
-
-    # Make 1st trace visible
-    fig.data[10].visible = True
 
     # Create and add slider
     weight_steps = []
@@ -36,48 +43,99 @@ def costpage1():
         weight_steps.append(step)
 
     weight_slider = dict(
-        active=30,
+        active=24,
         currentvalue={"prefix": "Slope(w): "},
         pad={"t": 50},
         steps=weight_steps,
         tickwidth=.5,
         len=.5,
-        x=.5
+        x=0
     )
 
     yint_steps = []
     for i, bval in enumerate(np.arange(0, 8, .25)):
         y_values = [weight * np.arange(0, 10, 0.01) + bval for weight in np.arange(-5, 5, 0.25)]
         step = dict(
-            method="restyle",  # Use "restyle" method to update traces
-            args=["y", y_values],  # Update y-values based on the selected y-intercept
-            label=f"{bval}",
+            method="restyle",
+            args=[{"y": y_values}],
+            label=f"{bval}"
         )
         yint_steps.append(step)
 
     yint_slider = dict(
-        active=5,
+        active=0,
         currentvalue={"prefix": "Y-Intercept(b): "},
         pad={"t": 50},
         steps=yint_steps,
         tickwidth=.5,
         len=.5,
-        x=0
+        x=0.5
     )
+
+    static_shapes = [
+        dict(
+            type='circle',
+            xref='x',
+            yref='y',
+            x0=1.9, y0=2.85,
+            x1=2.1, y1=3.15,
+            fillcolor='red',
+            line=dict(color='red'),
+            opacity=1,
+            visible=True
+        ),
+        dict(
+            type='circle',
+            xref='x',
+            yref='y',
+            x0=3.9, y0=3.35,
+            x1=4.1, y1=3.65,
+            fillcolor='red',
+            line=dict(color='red'),
+            opacity=1,
+            visible=True
+        ),
+        dict(
+            type='circle',
+            xref='x',
+            yref='y',
+            x0=5.9, y0=3.85,
+            x1=6.1, y1=4.15,
+            fillcolor='red',
+            line=dict(color='red'),
+            opacity=1,
+            visible=True
+        ),
+        dict(
+            type='circle',
+            xref='x',
+            yref='y',
+            x0=7.9, y0=4.35,
+            x1=8.1, y1=4.65,
+            fillcolor='red',
+            line=dict(color='red'),
+            opacity=1,
+            visible=True
+    )]
     
     sliders = [weight_slider, yint_slider]
-    
+
     fig.update_layout(
-        title="Updatable Linear Function",
+        title="<b>Updatable Linear Function (y = wx + b)</b>",
         template='simple_white',
         sliders=sliders,
         xaxis=dict(range=[0,10], dtick=1, showgrid=True),
         yaxis=dict(range=[0,8], dtick=1, showgrid=True),
-        width=900, height=600
+        width=870, height=600,
+        shapes=static_shapes,
+
     )
-    
+
+
     graph = fig.to_html()
     return render_template('cost/page1.html', prev_page='page3', next_page='page2', graph=graph)
+
+
 
 @cost_bp.route('/page2')
 def costpage2():
