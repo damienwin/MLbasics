@@ -3,7 +3,27 @@
 {% block navtitle %}Cost{% endblock %}
 
 {% block content %}
-Cost 2
+<div class="row">
+    <div class="col-md-7 mt-3">
+        {{ graph | safe }}
+    </div>
+    <div class="col-md-5 mt-4 mb-4">
+        <div class="ms-4 me-4 p-3" style="background-color: #f3f3f3">
+            <h1>How do we calculate Cost?</h1>
+            <p class="h4" style="line-height: 1.5">
+                There are many ways to calculate cost. We will be using mean squared error, a common way to measure cost for regression models. Take a look at the function below
+                <i class="bi bi-chevron-double-down"></i>
+                <br>
+                <img src="{{ url_for('static', filename='cost-function.png') }}" width="520px" height="120px">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">J represents the cost for the specific w and b values</li>
+                    <li class="list-group-item">m represents the amount of data points, where each point's cost is summed together, and divided to find the average</li>
+                    <li class="list-group-item">We find the difference between the prediction line function's y value and y value for each point (i)</li>
+                </ul> 
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block slider %}
@@ -21,7 +41,7 @@ Cost 2
     </div>
     <div class="col-md-6 text-end">
         {% if next_page %}
-        <a href="/cost/{{ next_page }}" class="btn btn-outline-info me-2">
+        <a href="/gradient_descent/{{ next_page }}" class="btn btn-outline-info me-2">
             <strong>
                 <h4 class="mt-1">
                     Next <i class="bi bi-caret-right"></i>

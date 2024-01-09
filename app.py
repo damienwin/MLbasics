@@ -2,9 +2,11 @@ from flask import Flask, request, send_from_directory, render_template, jsonify,
 import plotly.express as px
 import numpy as np
 from cost_app import cost_bp
+from gd_app import gd_bp
 
 app = Flask(__name__)
 app.register_blueprint(cost_bp)
+app.register_blueprint(gd_bp)
 
 @app.route('/')
 def home():

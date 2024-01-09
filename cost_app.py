@@ -135,12 +135,49 @@ def costpage1():
     graph = fig.to_html()
     return render_template('cost/page1.html', prev_page='page3', next_page='page2', graph=graph)
 
-
+# Generate data for random linear trending points
+initial_x = np.linspace(1, 8, 25)
+initial_y = 25 * initial_x + np.random.randn(25) * 20 + 100
 
 @cost_bp.route('/page2')
 def costpage2():
-    return render_template('cost/page2.html', prev_page='page1', next_page='page3')
+    # Add scatter points
+    fig = px.scatter(x=initial_x, y=initial_y, labels={'x': 'sq. feet in thousands', 'y': '$ price in thousands'})    
+    fig.update_traces(showlegend=True, name ='Given Dataset')
 
-@cost_bp.route('/page3')
-def costpage3():
-    return render_template('cost/page3.html', prev_page='page2', next_page='page4')
+    # Add line
+    line_x = np.linspace(0, 8, 16)
+    fig.add_scatter(x=line_x, y=(25 * line_x + 100), mode='lines', name="Prediction Line")
+
+    # Add cost line for each point
+    for x, y in zip(initial_x, initial_y):     
+        fig.add_shape(
+            type="line",
+            x0=x,
+            y0=y,
+            x1=x,
+            y1=(25*x+100),
+            line=dict(color="red", width=2, dash='dot')
+        )
+
+    # Add dotted line to legend
+    fig.add_trace(
+    go.Scatter(
+        x=[None],
+        y=[None],
+        mode='lines',
+        line=dict(color='red', width=2, dash='dot'),
+        name='Cost Lines'  
+    )
+)
+
+    fig.update_layout(
+        title="<b>Pricing vs. Square Feet of Houses</b>",
+        template='simple_white',
+        xaxis=dict(range=[.5, 8.5], dtick=1, showgrid=True),
+        yaxis=dict(range=[100, 300], dtick=50, showgrid=True), 
+        width=890, height=550
+    )
+    graph = fig.to_html()
+
+    return render_template('cost/page2.html', graph=graph, prev_page='page1', next_page='page1')
