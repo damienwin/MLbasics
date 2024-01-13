@@ -4,11 +4,24 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-6">
-        {{ w_graph | safe }}
+    <div class="col-md-7 mt-4 mb-4">
+        <div class="ms-4 p-3" style="background-color: #f3f3f3">
+            <h1>What is Gradient Descent?</h1>
+            <p class="h4" style="line-height: 1.5">
+                Gradient descent is a method of finding the minimum cost of a function. With infinite w and b values and combinations,
+                it is unrealistic to iterate through every value. To understand gradient descent, let's look at a graph where we have
+                w (or b) values on the x-axis and cost for the respective function on the y-axis.    
+                <i class="bi bi-chevron-double-right"></i>
+                <br><br>This dataset follows a trend with an optimal linear function of 
+                <br><span class="text-info">1.8x + 4.7</span>. We calculate the cost using the optimal b value of 4.7, and changing w values.
+                The graph seems to form a parabola shape, where the minimum point of the graph is at the optimal w value. The goal of gradient 
+                descent is to take steps along this graph, and approaach the minimum cost. However, this graph is just for visualization due to
+                the problem referenced earlier, so how do we find the minimum?
+            </p>
+        </div>  
     </div>
-    <div class="col-md-6">
-        {{ b_graph | safe }}
+    <div class="col-md-5">
+        {{ w_graph | safe }}
     </div>
 </div>
 {% endblock %}
@@ -17,7 +30,7 @@
 <div class="row">
     <div class="col-md-6 text-start">
         {% if prev_page %}
-        <a href="/cost/{{ prev_page }}" class="btn btn-outline-info ms-2">
+        <a href="/cost/{{ prev_page }}" class="btn btn-outline-info ms-2 text-dark border border-dark">
             <strong>
                 <h4 class="mt-1">
                     <i class="bi bi-caret-left"></i> Prev
@@ -28,7 +41,7 @@
     </div>
     <div class="col-md-6 text-end">
         {% if next_page %}
-        <a href="/gradient_descent/{{ next_page }}" class="btn btn-outline-info me-2">
+        <a href="/gradient_descent/{{ next_page }}" class="btn btn-outline-info me-2 text-dark border border-dark">
             <strong>
                 <h4 class="mt-1">
                     Next <i class="bi bi-caret-right"></i>

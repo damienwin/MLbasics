@@ -1,0 +1,51 @@
+{% extends "slideindex.html" %}
+{% block title %}Gradient Descent Page 1{% endblock %}
+{% block navtitle %}Gradient Descent{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="ms-4 me-4 p-3" style="background-color: #f3f3f3">
+            <p class="h4" style="line-height: 1.5">
+                The left graph shows gradient descent taking steps towards the minimum, and the right plots the current w value. 
+                Watch how the steps are smaller as it approaches the minimum, and how the line is getting closer to our data values!
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        {{ w_graph | safe }}
+    </div>
+    <div class="col-md-6">
+        {{ line_graph | safe }}
+    </div>
+</div>
+{% endblock %}
+
+{% block slider %}
+<div class="row">
+    <div class="col-md-6 text-start">
+        {% if prev_page %}
+        <a href="/gradient_descent/{{ prev_page }}" class="btn btn-outline-info ms-2 text-dark border border-dark">
+            <strong>
+                <h4 class="mt-1">
+                    <i class="bi bi-caret-left"></i> Prev
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+    <div class="col-md-6 text-end">
+        {% if next_page %}
+        <a href="/gradient_descent/{{ next_page }}" class="btn btn-outline-info me-2 text-dark border border-dark">
+            <strong>
+                <h4 class="mt-1">
+                    Next <i class="bi bi-caret-right"></i>
+                </h4>
+            </strong>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

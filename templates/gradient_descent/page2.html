@@ -4,12 +4,30 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-6">
-        {{ w_graph | safe }}
-    </div>
-    <div class="col-md-6">
-        {{ b_graph | safe }}
-    </div>
+    <div class="col-md-12 mt-4 mb-4">
+        <div class="ms-4 me-4 p-3" style="background-color: #dcd7d7ec">
+            <h1>Gradient Descent Step Calculation</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='gdstep.png') }}" width="700px" height="190px" style="margin-bottom: 10px; border: 3px solid rgb(0, 0, 0)">
+                    <img src="{{ url_for('static', filename='gd_intuition.png') }}" width="500px" height="300px" style="border: 3px solid rgb(187, 50, 189)">
+                </div>
+                <div class="col-md-6">
+                    <p class="h4" style="line-height: 1.5">
+                        For simple visualization, only w was graphed in the previous page, however 
+                        <span style="color: rgb(232, 171, 3)">both w and b are updated simutaneously in regression to ensure proper optimization.</span>
+                        <br><br><span style="color: rgb(187, 50, 189)">To efficiently approach the minimum value, we should adjust the step size: 
+                            larger steps when farther from the minimum and smaller steps as we get closer. To do this, we derive our cost function. 
+                            This naturally implements this, as the function's instantaneous derivative, or slope, becomes closer to 0 as it approaches the minimum.
+                        </span>
+                        <br><br><span style="color: rgb(189, 50, 50)">The learning rate controls how fast we approach the minimum. If it is too large,
+                            we may skip over the minimum. If it is too small, it may take too long to approach it.
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>  
+    </div>  
 </div>
 {% endblock %}
 
@@ -17,7 +35,7 @@
 <div class="row">
     <div class="col-md-6 text-start">
         {% if prev_page %}
-        <a href="/gradient_descent/{{ prev_page }}" class="btn btn-outline-info ms-2">
+        <a href="/gradient_descent/{{ prev_page }}" class="btn btn-outline-info ms-2 text-dark border border-dark">
             <strong>
                 <h4 class="mt-1">
                     <i class="bi bi-caret-left"></i> Prev
@@ -28,7 +46,7 @@
     </div>
     <div class="col-md-6 text-end">
         {% if next_page %}
-        <a href="/gradient_descent/{{ next_page }}" class="btn btn-outline-info me-2">
+        <a href="/gradient_descent/{{ next_page }}" class="btn btn-outline-info me-2 text-dark border border-dark">
             <strong>
                 <h4 class="mt-1">
                     Next <i class="bi bi-caret-right"></i>
