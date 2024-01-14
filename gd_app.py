@@ -37,10 +37,10 @@ w_cost_values = [cost(w, 2.9) for w in w_values]
 
 def dx_cost(w, b):
     predicted_y = w * initial_x + b
-    stepfunc = (predicted_y - initial_y) * initial_x # function when taking derivative of cost
-    step_mean = np.mean(stepfunc)
+    derivative = (predicted_y - initial_y) * initial_x # function when taking derivative of cost
+    dx_mean = np.mean(derivative)
 
-    return step_mean
+    return dx_mean
 
 def w_cost_parabola():
     fig = px.line(x=w_values, y=w_cost_values, labels={'x': 'w', 'y': 'cost(w)'})

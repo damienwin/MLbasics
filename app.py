@@ -3,10 +3,14 @@ import plotly.express as px
 import numpy as np
 from cost_app import cost_bp
 from gd_app import gd_bp
+from demonstration import demonstration_bp
+from config import SECRET_KEY
 
 app = Flask(__name__)
 app.register_blueprint(cost_bp)
 app.register_blueprint(gd_bp)
+app.register_blueprint(demonstration_bp)
+app.secret_key = SECRET_KEY
 
 @app.route('/')
 def home():
