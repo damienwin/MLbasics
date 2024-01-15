@@ -6,7 +6,7 @@
 <div class="container mt-4 ms-3">
     <div class="row">
         <div class="col-md-5">
-            <h1>Enter Slope and Y-Intercept</h1>
+            <h1>Generate Random Data w/ Trend Around Specific Slope and Intercept</h1>
             <form id="plotForm" action="/demonstration/plot" method="post" onsubmit="return validateForm()">  
                 <div class="row">
                     <div class="col-md-6">
@@ -20,7 +20,7 @@
                     </div>
                 </div> 
 
-                <div class="col-md-3">
+                <div class="col-md-3 mt-3">
                     <button type="submit" class="btn btn-outline-primary" style="background-color: #eaeaea; color: #2d2c2c; border-color: #2d2c2c;">Generate Plot</button>
                 </div>
             </form>
@@ -31,6 +31,9 @@
                     </form>
                 </div>
             {% endif %}
+            {% if animation %}
+            <br><br><br><h5 class="display4"> Watch the line's values slowly move towards your input, and to a function with minimum cost! <i class="bi bi-chevron-double-right"></i> </h1>
+            {% endif %}
         </div>
 
         <div class="col-md-7">
@@ -38,6 +41,8 @@
                 {{ plot | safe }}
             {% elif animation %}
                 {{ animation | safe }}
+            {% else %}
+                {{ blank | safe }}
             {% endif %}
         </div>
     </div>

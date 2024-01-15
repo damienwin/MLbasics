@@ -7,7 +7,23 @@ demonstration_bp = Blueprint('demonstration', __name__, url_prefix='/demonstrati
 
 @demonstration_bp.route('/')
 def demonstration():
-    return render_template('demonstration.html')
+    fig=go.Figure(
+        layout=go.Layout(
+            xaxis=dict(range=[0,10], dtick=1, showgrid=True),
+            yaxis=dict(range=[0,10], dtick=1, showgrid=True),
+            title_text="Plot Some Data into the Graph",
+            width=880, height=600
+        )
+    )
+    fig.update_layout(
+        template='simple_white',
+        paper_bgcolor='#F0F0F0'
+    )
+
+    graph=fig.to_html()
+
+    return render_template('demonstration.html', blank=graph)
+
 
 
 @demonstration_bp.route('/plot', methods=['POST'])
@@ -23,17 +39,18 @@ def plot():
 
     fig=go.Figure(
         data=[go.Scatter(x=initial_x, y=initial_y, mode="markers", marker=dict(color="blue", size=5), showlegend=False),
-              go.Scatter(x=[None], y=[None], mode="markers", marker=dict(color='blue', size=5), name="Data Points                          ")],
+              go.Scatter(x=[None], y=[None], mode="markers", marker=dict(color='blue', size=5), name="Data Points                 ")],
         layout=go.Layout(
                 xaxis=dict(range=[0,10], dtick=1, showgrid=True),
                 yaxis=dict(range=[0,10], dtick=1, showgrid=True),
                 title_text="User Generated Data",
-                width=900, height=600
+                width=880, height=600
         )
     )
 
     fig.update_layout(
         template='simple_white',
+        paper_bgcolor='#F0F0F0'
     )
 
     graph = fig.to_html()
@@ -53,13 +70,13 @@ def animate():
         cost_steps, w_steps, b_steps = gdsteps(x_data, y_data, animation_slope, animation_intercept)
 
         fig = go.Figure(
-            data=[go.Scatter(x=x_data, y=[0], mode="lines", line=dict(color="#00CED1", width=2), name=f"Current Function: 0.000x + 0.00 <br>Cost: {cost_steps[0]:.3f}"), # initial linear function
+            data=[go.Scatter(x=x_data, y=[0], mode="lines", line=dict(color="#00CED1", width=2), name=f"F(x): 0.000x + 0.00 <br>Cost: {cost_steps[0]:.3f}"), # initial linear function
                 go.Scatter(x=x_data, y=y_data, mode="markers", marker=dict(color="blue", size=5), name="Dataset Points")], # Add Data Points
             layout=go.Layout(
                 xaxis=dict(range=[0,10], dtick=1, showgrid=True),
                 yaxis=dict(range=[0,10], dtick=1, showgrid=True),
                 title_text="Regressing to Line of Best Fit",
-                width=900, height=600,
+                width=880, height=600,
                 updatemenus=[dict(
                     type="buttons",
                     buttons=[dict(label="Play",
@@ -71,13 +88,14 @@ def animate():
                     y=w_steps[i] * np.arange(-1, 11, .1) + b_steps[i],
                     mode="lines",
                     line=dict(color="#00CED1", width=2),
-                    name=f"Current Function: {w_steps[i]:.3f}x + {b_steps[i]:.2f} <br>Cost: {cost_steps[i]:.3f}"  
+                    name=f"F(x): {w_steps[i]:.3f}x + {b_steps[i]:.2f} <br>Cost: {cost_steps[i]:.3f}"  
                 )] 
             )
             for i in range(len(w_steps))] # iterate through all steps
         )
         fig.update_layout(
-            template="simple_white"
+            template="simple_white",
+            paper_bgcolor='#F0F0F0'
         )
         fig.update_xaxes(title_text="x-axis")
         fig.update_yaxes(title_text="y-axis")
