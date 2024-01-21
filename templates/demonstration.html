@@ -27,7 +27,7 @@
             {% if generated %}
                 <div class="mt-3">
                     <form id="animateForm" action="/demonstration/animate" method="post">
-                        <button type="submit" class="btn btn-outline-primary" style="background-color: #eaeaea; color: #2d2c2c; border-color: #2d2c2c;">Animate</button>
+                        <button type="submit" class="btn btn-outline-primary" style="background-color: #eaeaea; color: #2d2c2c; border-color: #2d2c2c;">Start Gradient Descent</button>
                     </form>
                 </div>
             {% endif %}
@@ -64,17 +64,15 @@
 {% endblock %}
 
 {% block slider %}
-<div class="row">
+<div class="row mt-2">
     <div class="col-md-6 text-start">
-        {% if prev_page %}
-        <a href="/gradient_descent/{{ prev_page }}" class="btn btn-outline-info ms-2 text-dark border border-dark">
+        <a href="/gradient_descent/page3" class="btn btn-outline-info ms-2 text-dark border border-dark">
             <strong>
                 <h4 class="mt-1">
                     <i class="bi bi-caret-left"></i> Prev
                 </h4>
             </strong>
         </a>
-        {% endif %}
     </div>
     <div class="col-md-6 text-end">
         <a href="/" class="btn btn-outline-info me-2 text-dark border border-dark">

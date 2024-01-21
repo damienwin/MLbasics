@@ -55,7 +55,7 @@ def initial_graph():
         template='simple_white',
         xaxis=dict(range=[1, 8], dtick=1, showgrid=True),
         yaxis=dict(range=[100, 300], dtick=50, showgrid=True), 
-        width=840, height=480
+        width=810, height=460
     )
 
     return fig

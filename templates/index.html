@@ -22,10 +22,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link text-white" id="home" href="/">Home</a>
+                    <a class="nav-item nav-link text-white" id="home" href="#start">Tutorial</a>
                     {% block nothome %}
-                    <a class="nav-item nav-link text-white" id="about" href="/about">About</a>
-                    <a class="nav-item nav-link text-white" id="repo" href="/repo">Github Repository</a>
+                    <a class="nav-item nav-link text-white" id="about" href="#aboutsection">About</a>
+                    <a class="nav-item nav-link text-white" id="repo" href="https://github.com/damienwin/MLbasics">Github Repository</a>
                     {% endblock %}
                 </div>
             </div>
@@ -81,7 +81,44 @@
       </button>
     </div>
 
-    <a href="/linear_regression/page1">Get Started</a>
+    
+    <div class="container-fluid" style="background-color: #e2e1e1" id="start">
+      <div class="row mt-2" >
+        <div class="col-md-12 text-center mt-4">
+          <h1 class="display-4 mt-3"><strong>Get Started on the<br></h1><h1 class="display-5"><a href="/linear_regression/page1">Interactive Tutorial</a></h1></strong></h1>
+        </div>
+      </div>
+
+      <img src="{{ url_for('static', filename='graphgif.gif') }}" class="rounded mx-auto d-block mt-5 " height="300px"> 
+      <br><br>
+    </div>
+
+    <div class="container mt-5" id="aboutsection">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="{{ url_for('static', filename='profile.jpeg') }}" alt="About Image" class="img-fluid rounded border" style="max-width: 75%; margin-left: 10%;">
+        </div>
+        <div class="col-md-8 text-dark p-4 rounded" style="background-color: #454444; line-height: 2">
+          <h1 class="text-white">About Me</h1>
+          <p class="text-white">
+            Damien Nguyen is a student at Louisiana State University serving as an Undergraduate Researcher for <a href="https://intellisys.haow.ca/" style="text-decoration: none">IntelliSys Lab</a> - an
+            artificial intelligence based research team. 
+          </p>
+          <p class="text-white">
+            This website serves as an interactive tutorial on linear regression, a fundamental aspect of machine learning. 
+            It has been created to showcase Damien's ongoing academic pursuits, for full-stack web design experience, and
+            to help others develop a fundamental understanding of machine learning.
+          </p>
+          <p class="text-white">
+            This website consists of HTML, CSS, JS, Plotly, NumPy, and Python in order to create animated plots using regression algorithms and formulas.
+            View the development process <a href="https://github.com/damienwin/MLbasics" style="text-decoration: none">here</a>, in the Github Repository.
+          </p>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    
+  
     {% endblock %}
 
     
