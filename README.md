@@ -1,0 +1,1 @@
+This is a private website created to visualize the basics of linear regression, and the intuition behhind the formulas used for it. It includes interactive sliders and live graphs, and is coded using HTML, CSS, Python, and Plotly.
